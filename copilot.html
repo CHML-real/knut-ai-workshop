@@ -1,0 +1,31 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Copilot으로 수정 범위 통제하기 · 교통대 실습</title><link rel="stylesheet" href="assets/manual.css"><header><b>국립한국교통대학교 · 행정 실습</b><nav aria-label="목차"><a href="index.html">홈</a><a href="setup.html">설치·복제</a><a href="day1.html">1일차</a><a href="day2.html">2일차</a><a href="gpt.html">무료 GPT</a><a href="copilot.html">Copilot 심화</a></nav></header><main><span class="k">심화 가이드 · 구현과 검증</span><h1>Copilot으로 수정 범위 통제하기</h1><figure><a href="assets/patch-map.png"><img loading="lazy" src="assets/patch-map.png" alt="파일 첨부부터 변경 전후 검토까지"></a><figcaption>파일 첨부부터 변경 전후 검토까지 · 단계 안내도</figcaption></figure><h2 id="먼저-파일과-함수를-지정하세요">먼저 파일과 함수를 지정하세요</h2>
+<p>VS Code에서 프로젝트 폴더를 열고 Chat 입력창에 #을 입력해 파일이나 심볼을 선택하거나 탐색기에서 파일을 채팅창으로 끌어 넣으세요. 첨부된 이름을 확인합니다. 1일차는 day1.py, 2일차는 day2.py와 report.py를 함께 지정합니다. common.py는 결과 저장 방식을 확인할 때 추가하세요.</p>
+<pre><code>첨부한 코드에서 엑셀 입력 → 상태 선택 → 결과 저장이 일어나는 위치를 알려줘.
+수정하기 전에 바꿀 함수와 그대로 호출할 함수를 표로 제시해 줘.</code></pre>
+<h2 id="한-기능씩-구현하세요">한 기능씩 구현하세요</h2>
+<pre><code>day1.py에 기준일 당시 미회신 목록을 계산하는 함수를 추가해 줘.
+[내가 확정한 기준일·경과일·정렬 규칙]
+이 함수는 원본 데이터프레임을 바꾸지 않고 새 목록을 반환해야 해.
+기존 출력에 연결할 위치를 보여줘. 새 라이브러리는 필요 없어.</code></pre>
+<p>함수 결과를 먼저 확인한 뒤 다음 요청에서 기존 write_excel 호출에 시트를 연결하세요. 변경을 작게 나누면 잘못된 필터가 들어간 위치를 찾기 쉽습니다.</p>
+<h2 id="두-파일을-바꿀-때는-데이터-전달을-먼저-합의하세요">두 파일을 바꿀 때는 데이터 전달을 먼저 합의하세요</h2>
+<pre><code>day2.py에서 이미 계산한 사업별·부서별 금액을 확인해 줘.
+네 번째 슬라이드에 전달할 열과 단위를 먼저 적고, make_report의 호출부와 정의를 함께 수정해 줘.
+집계는 day2.py에서 한 번만 하고 report.py에서는 표시만 해.
+증가한 사업이 두 개뿐일 때와 증가 부서가 없을 때도 처리해 줘.</code></pre>
+<h2 id="diff에서-확인할-세-곳">diff에서 확인할 세 곳</h2>
+<ol type="1">
+<li><strong>입력</strong> — 기준일 다음의 회신을 걸러낸 후 마지막 순번을 고르나요?</li>
+<li><strong>계산</strong> — 증가액 비교 단위는 원인가요? 표시용 ‘만 원’ 변환이 순위 계산에 섞였나요?</li>
+<li><strong>출력</strong> — 기존 시트와 슬라이드가 남았나요? 터미널에서 아래 명령으로 변경 파일과 함수 주변을 확인하세요.</li>
+</ol>
+<pre><code>git status --short
+git diff -- day1.py day2.py report.py</code></pre>
+<p>VS Code의 소스 제어에서도 파일을 눌러 변경 전후를 비교할 수 있습니다. 제안 중 일부만 필요한 경우 해당 변경 부분을 검토하고 제공되는 유지·되돌리기 동작을 사용하세요.</p>
+<h2 id="반례를-만들어-스스로-검수하기">반례를 만들어 스스로 검수하기</h2>
+<pre><code>내 변경 사항을 검토해 줘. ① 정확히 7일 ② 기준일 다음 날 회신
+③ 두 사업의 증가액 동률 중 지금 코드에서 실패할 수 있는 사례를 찾아줘.
+사례마다 입력 2~3행, 예상 결과, 확인할 함수만 적어줘.</code></pre>
+<p>AI가 제시한 예상값은 원본 표와 직접 대조하세요. 수정 전후 결과를 나란히 열고, 오류가 나면 전체 재작성을 요청하기 전에 실제 오류 줄과 입력 예시를 전달하세요.</p>
+<p><a href="https://code.visualstudio.com/docs/chat/copilot-chat-context">VS Code에서 맥락 추가하기</a> · <a href="https://code.visualstudio.com/docs/agents/run/review-code-edits">변경 사항 검토하기</a></p>
+<footer><a href="index.html">실습 목차로 돌아가기</a></footer></main><script src="assets/copy.js"></script></html>

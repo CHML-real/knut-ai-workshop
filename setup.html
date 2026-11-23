@@ -1,0 +1,32 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>환경 준비와 첫 실행 · 교통대 실습</title><link rel="stylesheet" href="assets/manual.css"><header><b>국립한국교통대학교 · 행정 실습</b><nav aria-label="목차"><a href="index.html">홈</a><a href="setup.html">설치·복제</a><a href="day1.html">1일차</a><a href="day2.html">2일차</a><a href="gpt.html">무료 GPT</a><a href="copilot.html">Copilot 심화</a></nav></header><main><span class="k">시작하기</span><h1>환경 준비와 첫 실행</h1><figure><a href="assets/open-folder.png"><img loading="lazy" src="assets/open-folder.png" alt="프로젝트를 열 때 확인할 세 위치"></a><figcaption>프로젝트를 열 때 확인할 세 위치 · 단계 안내도</figcaption></figure><h2 id="windows에서-준비하기">Windows에서 준비하기</h2>
+<ol type="1">
+<li><a href="https://git-scm.com/downloads/win">Git for Windows</a>, <a href="https://www.python.org/downloads/windows/">Python for Windows</a>, <a href="https://code.visualstudio.com/download">VS Code</a>를 설치하세요. Python은 3.12 또는 3.13 환경을 권장합니다.</li>
+<li>새 터미널에서 아래 두 줄을 각각 실행해 버전이 표시되는지 확인하세요.</li>
+</ol>
+<pre><code>git --version
+py --version</code></pre>
+<ol start="3" type="1">
+<li>강사가 공유한 GitHub 저장소의 <strong>Code → HTTPS</strong> 주소를 복사합니다. PowerShell에서 아래 첫 줄을 입력하고 주소를 붙여넣은 뒤 Enter를 누르세요. 다음 두 줄로 복제하고 이동합니다.</li>
+</ol>
+<pre class="powershell"><code>$courseUrl = Read-Host &quot;강사가 공유한 저장소 HTTPS 주소&quot;
+git clone $courseUrl knut-workshop
+cd knut-workshop</code></pre>
+<ol start="4" type="1">
+<li>VS Code에서 <strong>파일 → 폴더 열기</strong>로 knut-workshop을 선택하세요. 공개 전 ZIP으로 연습할 때는 압축을 전부 풀고 day1.py가 보이는 폴더를 열면 됩니다.</li>
+<li>VS Code의 <strong>터미널 → 새 터미널</strong>에서 다음을 차례로 실행합니다.</li>
+</ol>
+<pre><code>py -m pip install -r requirements.txt
+py day1.py
+py day2.py</code></pre>
+<ol start="6" type="1">
+<li>results 폴더에서 엑셀 두 개와 PPT 한 개를 엽니다. 배포된 예시 파일이 있으므로 터미널 완료 메시지와 파일 수정 시각도 확인하세요. 재실행 전에는 결과 파일을 닫습니다.</li>
+<li>VS Code의 채팅에서 GitHub 계정으로 Copilot에 로그인하고 “day1.py의 입력 파일 이름을 알려줘”라고 물어보세요. 별도 브라우저 탭에서 <a href="https://chatgpt.com/">ChatGPT</a>를 열어 설계 대화를 준비합니다.</li>
+</ol>
+<h2 id="막혔을-때-확인하기">막혔을 때 확인하기</h2>
+<ul>
+<li><strong>py를 찾지 못함</strong> — 설치 후 터미널을 다시 엽니다. python --version으로 Python 3이 확인되면 위 명령의 py를 python으로 바꿉니다.</li>
+<li><strong>requirements.txt를 찾지 못함</strong> — 터미널에서 dir을 실행해 day1.py와 requirements.txt가 함께 보이는지 확인합니다.</li>
+<li><strong>PermissionError</strong> — 결과 엑셀과 PPT를 닫고 재실행합니다.</li>
+<li><strong>Copilot 로그인 문제</strong> — VS Code 계정 메뉴에서 GitHub 계정을 확인하고 <a href="https://code.visualstudio.com/docs/copilot/setup">공식 설정 안내</a>를 참고하세요.</li>
+</ul>
+<footer><a href="index.html">실습 목차로 돌아가기</a></footer></main><script src="assets/copy.js"></script></html>
